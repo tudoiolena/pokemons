@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchPokemonDetails, fetchPokemons } from "../actions";
 import { PokemonListResponse } from "../../types/pokemon-list.response";
-import { Pokemon } from "../../types/pockemon-response";
+import { Pokemon } from "../../types/pokemon-response";
 interface PokemonState {
   pokemons: PokemonListResponse | [];
   selectedPokemon: Pokemon | null;

@@ -5,10 +5,11 @@ import { AppDispatch } from "./store/store";
 import {
   PokemonsList,
   selectedPokemonData,
-} from "./store/slices/pockemon.slice";
+} from "./store/slices/pokemon.slice";
 import { fetchPokemonDetails, fetchPokemons } from "./store/actions";
-import { PokemonDetails } from "./components/pockemon-details";
-import { Pokemon } from "./types/pockemon-response";
+import { PokemonDetails } from "./components/pokemon-details";
+import { Pokemon } from "./types/pokemon-response";
+import { capitalizeFirstLetter } from "./helpers/capitalize-first-letter";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,21 +25,24 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
-      <div className="pokemon-list">
+    <div className="pokemon__container">
+      <div className="pokemon__list-container">
         <h2>Pokemons</h2>
-        <ul>
+        <ul className="pokemon__list">
           {Array.isArray(pokemons) &&
             pokemons.map((pokemon: Pokemon, index: number) => (
-              <li key={index} onClick={() => handlePokemonClick(pokemon.name)}>
-                {pokemon.name}
+              <li
+                className="pokemon__list-item"
+                key={index}
+                onClick={() => handlePokemonClick(pokemon.name)}
+              >
+                {capitalizeFirstLetter(pokemon.name)}
               </li>
             ))}
         </ul>
       </div>
       {selectedPokemon && (
-        <div>
-          <h2>Pokemon Details</h2>
+        <div className="polemon__details">
           <PokemonDetails pokemon={selectedPokemon} />
         </div>
       )}
