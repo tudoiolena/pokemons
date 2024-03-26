@@ -1,21 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchPokemonDetails, fetchPokemons } from "../actions";
-
-interface PokemonListItem {
-  name: string;
-  url: string;
-}
-
-interface PokemonListResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: PokemonListItem[];
-}
-
+import { PokemonListResponse } from "../../types/pokemon-list.response";
+import { Pokemon } from "../../types/pockemon-response";
 interface PokemonState {
   pokemons: PokemonListResponse | [];
-  selectedPokemon: any | null;
+  selectedPokemon: Pokemon | null;
 }
 
 const initialState: PokemonState = {

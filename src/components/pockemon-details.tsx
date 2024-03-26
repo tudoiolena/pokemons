@@ -1,5 +1,12 @@
-export const PokemonDetails = ({ pokemon }) => {
-  const manualTranslations = {
+import { FC } from "react";
+import { Pokemon } from "../types/pockemon-response";
+
+interface IProps {
+  pokemon: Pokemon;
+}
+
+export const PokemonDetails: FC<IProps> = ({ pokemon }: IProps) => {
+  const manualTranslations: Record<string, string> = {
     overgrov: "переростати",
     blaze: "полум'я",
     solarpower: "сонячна енергія",
@@ -17,7 +24,7 @@ export const PokemonDetails = ({ pokemon }) => {
   return (
     <div>
       <h2>{name}</h2>
-      <img src={sprites.front_default} alt={name} />
+      {sprites.front_default && <img src={sprites.front_default} alt={name} />}
       <h3>Abilities:</h3>
       <ul>
         {abilities &&

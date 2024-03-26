@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "./store/store";
@@ -8,16 +8,15 @@ import {
 } from "./store/slices/pockemon.slice";
 import { fetchPokemonDetails, fetchPokemons } from "./store/actions";
 import { PokemonDetails } from "./components/pockemon-details";
+import { Pokemon } from "./types/pockemon-response";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
   const pokemons = useSelector(PokemonsList);
   const selectedPokemon = useSelector(selectedPokemonData);
-  const [clickedPokemon, setClickedPokemon] = useState(null);
 
-  const handlePokemonClick = (pokemonName) => {
+  const handlePokemonClick = (pokemonName: string) => {
     dispatch(fetchPokemonDetails(pokemonName));
-    setClickedPokemon(pokemonName);
   };
 
   useEffect(() => {
@@ -29,8 +28,8 @@ function App() {
       <div className="pokemon-list">
         <h2>Pokemons</h2>
         <ul>
-          {pokemons &&
-            pokemons.map((pokemon, index) => (
+          {Array.isArray(pokemons) &&
+            pokemons.map((pokemon: Pokemon, index: number) => (
               <li key={index} onClick={() => handlePokemonClick(pokemon.name)}>
                 {pokemon.name}
               </li>
