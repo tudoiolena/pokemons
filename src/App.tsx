@@ -1,27 +1,17 @@
-import { useEffect, useState } from "react";
-import { fetchPokemons } from "../utils/api-call";
-
+import { useEffect } from "react";
 import "./App.css";
-
-interface Pokemon {
-  name: string;
-}
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "./store/store";
+import { PokemonsList } from "./store/slices/pockemon.slice";
+import { fetchPokemons } from "./store/actions";
 
 function App() {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+  const pokemons = useSelector(PokemonsList);
 
   useEffect(() => {
-    const getPokemons = async () => {
-      try {
-        const data = await fetchPokemons();
-        console.log("The data is", data);
-        setPokemons(data.results);
-      } catch (err) {
-        console.error("Error getting pokemons data");
-      }
-    };
-    getPokemons();
-  }, []);
+    dispatch(fetchPokemons());
+  }, [dispatch]);
 
   return (
     <>
