@@ -1,5 +1,5 @@
 export const apiCall = async (url: string) => {
-  const baseUrl = "/api/";
+  const baseUrl = "https://pokeapi.co/api/v2";
 
   try {
     const response = await fetch(`${baseUrl}/${url}`);
